@@ -1,0 +1,14 @@
+{
+  "name": "simple_services",
+  "version": "1.0.0",
+  "description": "Generic Services used in websites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gustavo del Pino",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.14.0"
+  }
+}
