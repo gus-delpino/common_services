@@ -3,10 +3,14 @@ var express = require('express');
 var moment = require('moment');
 var bodyParser = require('body-parser');
 
-var mailer_routes = require('./mailer/routes');
-
 var app = express();
-var port = 8080;
+
+//Check if we have environment variables
+if( !process.env || !process.env.PORT ) {
+    require('./local_config');
+}
+
+var port = process.env.PORT;
 
 //Routes/Middleware
 require('./routes/routes')(app);

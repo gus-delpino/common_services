@@ -3,6 +3,6 @@ var express = require('express'),
 
 var MailerController = require('./controller');
 
-router.post('/sendGpmContactMe', MailerController.sendContactMeEmail );
+router.post('/sendGpmContactMe', MailerController.sendContactMeEmail.bind(MailerController) );
 
 module.exports = router;
