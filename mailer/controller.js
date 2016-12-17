@@ -1,6 +1,7 @@
 'use strict';
 
 var nodemailer = require('nodemailer');
+var moment = require('moment');
 var mailer_settings = require('./mailer_config');
 
 class MailerController {
@@ -58,9 +59,23 @@ class MailerController {
     }
 
     sendContactMeEmail(req, res) {
-        let subject = 'Testing subject',
-            body = 'Testing email body. <b>Bold text</b>',
-            mailer_site = 'gustavodelpino';
+
+        //Validate POST
+        if (!req.body.name || !req.body.subject || !req.body.message ||
+            !req.body.email || !req.body.site) {
+            res.send('Sure');
+            return false;
+        }
+
+        let timestamp = moment(new Date()).format('MMMM Mo YYYY H:mma');
+        let subject = "New Message Notification from website",
+            mailer_site = req.body.site,
+            body = `You have a received a new message from ${mailer_site}.com. <br />
+                    <b>Date/Time:</b> ${timestamp}<br />
+                    <b>Name:</b> ${req.body.name}<br />
+                    <b>Email:</b> ${req.body.email}<br />
+                    <b>Subject: </b> ${req.body.subject}<br />
+                    <b>Message:</b> ${req.body.message}<br />`;
 
         this.verifyTransporter()
             .then( () => this.sendEmail(mailer_site, subject, body) )

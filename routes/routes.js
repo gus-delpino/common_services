@@ -8,7 +8,7 @@ var routes = function(app) {
         res.setHeader('Access-Control-Allow-Origin', '*');
 
         // Request methods you wish to allow
-        //res.setHeader('Access-Control-Allow-Methods', 'POST');
+        res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
 
         // Request headers you wish to allow
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -19,6 +19,9 @@ var routes = function(app) {
 
         // Pass to next layer of middleware
         next();
+    });
+    app.get('/health', (req, res) => {
+        res.send('Sup');
     });
 
     // Mailer endpoints
